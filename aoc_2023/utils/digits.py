@@ -15,9 +15,6 @@ LETTERS_TO_DIGITS = {
     "nine": 9
 }
 
-#twoneerwt094r
-#oneightfdca032
-#oneightfouroneight
 def replace_letters_by_digits(text: str) -> str:
     new_text = " " * len(text)
     for letter, digit in LETTERS_TO_DIGITS.items():
@@ -29,14 +26,14 @@ def replace_letters_by_digits(text: str) -> str:
     return text
 
 
-def find_first_digit(text: str) -> int:
+def find_first_digit(text: str) -> str:
     try:
         return DIGIT_REGEX.search(text).group()
     except AttributeError:
         return None
 
 
-def get_code_in_line(line_text: str, spelled_out_digits: bool=False) -> Tuple[int, int]:
+def get_code_in_line(line_text: str, spelled_out_digits: bool=False) -> Tuple[str, str]:
     if spelled_out_digits:
         line_text = replace_letters_by_digits(line_text)
     first_digit = find_first_digit(line_text)
@@ -44,7 +41,3 @@ def get_code_in_line(line_text: str, spelled_out_digits: bool=False) -> Tuple[in
         return None, None
     last_digit = find_first_digit(line_text[::-1])
     return first_digit, last_digit
-
-if __name__ == "__main__":
-    text = "onerrerfs32fsfdsgone"
-    print(replace_letters_by_digits(text))
