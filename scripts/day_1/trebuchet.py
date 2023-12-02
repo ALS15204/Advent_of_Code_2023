@@ -4,10 +4,11 @@ from aoc_2023.utils.digits import get_code_in_line
 
 SCRIPT_DIR = Path(__file__).parent.absolute()
 INPUT_DATA = SCRIPT_DIR / "input.dat"
-if __name__ == "__main__":
+
+
+def main():
     with open(INPUT_DATA, "r") as f:
         data = [line.strip("\n") for line in f.readlines()]
-
 
     # PART 1: Consider pure digits
     sum_part_1 = 0
@@ -26,3 +27,7 @@ if __name__ == "__main__":
             continue
         sum_part_2 += int(f"{first_digit}{last_digit}")
     print(f"Answer to part 2: {sum_part_2}")
+
+
+if __name__ == "__main__":
+    main()

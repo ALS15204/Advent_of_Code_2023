@@ -3,6 +3,7 @@ import re
 from typing import Dict, List
 
 SCRIPT_PATH = Path(__file__).parent.absolute()
+INPUT_DATA = SCRIPT_PATH / "input.dat"
 GAME_ID_STRING = "game_id"
 BLUE = "blue"
 RED = "red"
@@ -68,7 +69,7 @@ def derive_game_power(game_info: Dict[int, List[Dict[str, str]]]) -> int:
 
 
 def main():
-    with open(SCRIPT_PATH / "input.dat", "r") as f:
+    with open(INPUT_DATA, "r") as f:
         games = [get_game_id_to_draws(line.strip("\n")) for line in f.readlines()]
     possible_games = [game for game in games if is_game_possible(game)]
     print(f"Answer to part 1: {sum(list(game.keys())[0] for game in possible_games)}")
