@@ -3,8 +3,8 @@ import re
 from typing import Dict, List
 
 SCRIPT_PATH = Path(__file__).parent.absolute()
-
-GAME_ID_REGEX = re.compile(r"(?:Game (?P<game_name>\d+): )")
+GAME_ID_STRING = "game_id"
+GAME_ID_REGEX = re.compile(r"(?:Game (?P<game_id>\d+): )")
 GAME_INFO_REGEX = re.compile(
     r"(?P<blue>(\d+(?= blue)))|"
     r"(?P<red>(\d+(?= red)))|"
@@ -30,7 +30,7 @@ def get_draw_info(draw_string: str) -> Dict[str, int]:
 def get_game_string_to_game_info(game_string: str) -> Dict[int, List[Dict[str, int]]]:
     game_info = {}
     game_id_match = GAME_ID_REGEX.search(game_string)
-    game_id = int(game_id_match.group("game_name"))
+    game_id = int(game_id_match.group(GAME_ID_STRING))
     draw_info_list = []
     for draw_string in game_string[game_id_match.end():].split(";"):
         draw_info_list.append(get_draw_info(draw_string))
