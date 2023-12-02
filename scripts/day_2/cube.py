@@ -4,16 +4,20 @@ from typing import Dict, List
 
 SCRIPT_PATH = Path(__file__).parent.absolute()
 GAME_ID_STRING = "game_id"
-GAME_ID_REGEX = re.compile(r"(?:Game (?P<game_id>\d+): )")
+BLUE = "blue"
+RED = "red"
+GREEN = "green"
+
+GAME_ID_REGEX = re.compile(r"(?:Game (?P<" + GAME_ID_STRING + ">\d+): )")
 GAME_INFO_REGEX = re.compile(
-    r"(?P<blue>(\d+(?= blue)))|"
-    r"(?P<red>(\d+(?= red)))|"
-    r"(?P<green>(\d+(?= green)))"
+    r"(?P<blue>(\d+(?= " + BLUE + ")))|"
+    r"(?P<red>(\d+(?= " + RED + ")))|"
+    r"(?P<green>(\d+(?= " + GREEN + ")))"
     )
 GAME_CONSTRAINT = {
-    "blue": 14,
-    "red": 12,
-    "green": 13
+    BLUE: 14,
+    RED: 12,
+    GREEN: 13
     }
 ALL_COLORS = list(GAME_CONSTRAINT.keys())
 
