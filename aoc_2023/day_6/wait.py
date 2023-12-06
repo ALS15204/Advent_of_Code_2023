@@ -1,25 +1,24 @@
+import math
 from pathlib import Path
 
 SCRIPT_DIR = Path(__file__).parent.absolute()
-INPUT_DATA = SCRIPT_DIR / "input.dat"
+INPUT_DATA = SCRIPT_DIR / "example.dat"
 
 
-def find_min_start_time(time: int, distance: int) -> int:
-    start_time = distance // time
-    for t in range(start_time, 0, -1):
-        if t * (time - t) < distance:
-            return t + 1
-    return 1
+def find_min_max_start_time(time: int, distance: int) -> int:
+    factor = time ** 2 / 4 - distance
+    return (
+        math.floor(time / 2 - math.sqrt(factor)), 
+        math.ceil(time / 2 + math.sqrt(factor))
+        )
+
 
 def get_number_of_wins(time: int, distance: int) -> int:
-    count = 0
-    start_time = find_min_start_time(time, distance)
-    for t in range(start_time, time + 1):
-        if t * (time - t) > distance:
-            count += 1
-        elif count > 0:
-            break
-    return count
+    adjustment = 0
+    start_time, end_time = find_min_max_start_time(time, distance)
+    if int(start_time * (time - start_time)) <= distance:
+        adjustment -= 1
+    return (end_time - start_time) + adjustment
 
 
 def main():
