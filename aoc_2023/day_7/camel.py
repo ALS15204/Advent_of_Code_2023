@@ -56,23 +56,7 @@ def sort_hand_bid_tuples_of_same_type(
         ("".join(card_rank_score_to_type[c] for c in hand), bid) for hand, bid in hands_ranked
         ]
 
-
-def main():
-    with open(INPUT_FILE_PATH, "r") as f:
-        hand_bid_tuples = [tuple(line.strip("\n").split()) for line in f.readlines()]
-    hand_bid_tuples_by_type = [[] for _ in range(7)]
-    for hand, bid in hand_bid_tuples:
-        hand_rank_score = get_rank_score_from_hand(hand)
-        hand_bid_tuples_by_type[hand_rank_score - 1].append((hand, bid))
-    ranked_hand_bid = []
-    for hand_bid_tuples_list in hand_bid_tuples_by_type:
-        ranked_hand_bid.extend(sort_hand_bid_tuples_of_same_type(hand_bid_tuples_list))
-    winning = 0
-    for rank, (hand, bid) in enumerate(ranked_hand_bid, 1):
-        winning += rank * int(bid)
-    print(f"Answer to Part 1: {winning}")
-
-    wild_card = "J"
+def get_winning_score_from_one_game(hand_bid_tuples, wild_card: Optional[str] = ""):
     hand_bid_tuples_by_type = [[] for _ in range(7)]
     for hand, bid in hand_bid_tuples:
         hand_rank_score = get_rank_score_from_hand(hand, wild_card=wild_card)
@@ -83,6 +67,16 @@ def main():
     winning = 0
     for rank, (hand, bid) in enumerate(ranked_hand_bid, 1):
         winning += rank * int(bid)
+    return winning
+
+
+def main():
+    with open(INPUT_FILE_PATH, "r") as f:
+        hand_bid_tuples = [tuple(line.strip("\n").split()) for line in f.readlines()]
+    winning = get_winning_score_from_one_game(hand_bid_tuples)
+    print(f"Answer to Part 1: {winning}")
+
+    winning = get_winning_score_from_one_game(hand_bid_tuples, wild_card="J")
     print(f"Answer to Part 2: {winning}")
 
 if __name__ == '__main__':
