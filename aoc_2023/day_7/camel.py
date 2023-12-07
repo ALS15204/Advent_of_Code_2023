@@ -57,7 +57,7 @@ def sort_hand_bid_tuples_of_same_type(
         ]
 
 def get_winning_score_from_one_game(hand_bid_tuples, wild_card: Optional[str] = ""):
-    hand_bid_tuples_by_type = [[] for _ in range(7)]
+    hand_bid_tuples_by_type = [[] for _ in range(len(HAND_RANK_SCORE_TO_CARD_COUNT))]
     for hand, bid in hand_bid_tuples:
         hand_rank_score = get_rank_score_from_hand(hand, wild_card=wild_card)
         hand_bid_tuples_by_type[hand_rank_score - 1].append((hand, bid))
