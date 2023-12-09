@@ -27,13 +27,6 @@ def find_next_number(int_sequence: List[int]) -> int:
     return int_sequence[-1] + sum([diff_list[-1] for diff_list in diffrence_lists])
 
 
-def find_first_number(int_sequence: List[int]) -> int:
-    diffrence_lists = construct_diffrence_lists(int_sequence)
-    substraction = diffrence_lists[-1][0]
-    for diff_list in diffrence_lists[::-1][1:]:
-        substraction = diff_list[0] - substraction
-    return int_sequence[0] - substraction
-
 def main():
     with open(INPUT_FILE_PATH) as f:
         input_lines = [line.strip("\n") for line in f.readlines()]
@@ -41,7 +34,7 @@ def main():
     answer_1 = sum([find_next_number(sequence) for sequence in sequences])
     print(f"Answer to Part 1: {answer_1}")
 
-    answer_2 = sum([find_first_number(sequence) for sequence in sequences])
+    answer_2 = sum([find_next_number(sequence[::-1]) for sequence in sequences])
     print(f"Answer to Part 2: {answer_2}")
 
 
