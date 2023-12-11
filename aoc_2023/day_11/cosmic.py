@@ -8,7 +8,7 @@ EMPTY_SPACE = "."
 GALAXY = "#"
 N_EXP_1 = 2
 N_EXP_2 = 1000000
-NO_EXPANSION = 1
+NO_EXPANSION = 0
 
 
 def expand_map(cosmic_map: List[str], n_exp: int=1) -> List[str]:
@@ -55,7 +55,7 @@ def main():
     dist_n_exp_1 = find_sum_of_shortest_distances(cosmic_map, N_EXP_1 - 1)
     print(f"Answer to Part 1: {dist_n_exp_1}")
 
-    no_expansion_dist = find_sum_of_shortest_distances(cosmic_map, 0)
+    no_expansion_dist = find_sum_of_shortest_distances(cosmic_map, NO_EXPANSION)
     increase_per_expansion = dist_n_exp_1 - no_expansion_dist
     dist_n_exp_2 = dist_n_exp_1 + increase_per_expansion * (N_EXP_2 - N_EXP_1)
     print(f"Answer to Part 2: {dist_n_exp_2}")
