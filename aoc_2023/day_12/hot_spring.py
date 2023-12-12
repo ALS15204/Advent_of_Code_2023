@@ -25,25 +25,7 @@ def count_broken_spring_groups(spring_line: str) -> List[int]:
     return broken_spring_groups
 
 
-def replace_character_in_string(string: str, character: str, index: int) -> str:
-    return string[:index] + character + string[index + 1:]
 
-
-# def find_possible_combinations(spring_line: str, groups: List[int]) -> int:
-#     number_of_broken = spring_line.count(BROKEN)
-#     number_to_assign = sum(groups) - number_of_broken
-#     unknown_positions = [i for i, spring in enumerate(spring_line) if spring == UNKNOWN]
-#     n_combinations = 0
-#     for positions in itertools.combinations(unknown_positions, number_to_assign):
-#         string_to_test = spring_line
-#         for position in positions:
-#             string_to_test = replace_character_in_string(string_to_test, BROKEN, position)
-#         if count_broken_spring_groups(string_to_test.replace("?", ".")) == groups:
-#             n_combinations += 1
-#     return n_combinations
-
-
-CACHE = {}
 def find_possible_combinations(spring_line, groups, i, bi, current):
   key = (i, bi, current)
   if key in CACHE:
