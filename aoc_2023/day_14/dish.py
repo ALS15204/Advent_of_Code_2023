@@ -15,6 +15,7 @@ WEST = "W"
 SOUTH = "S"
 
 N_CYCLE = 1000000000
+CACHE = {}
 
 
 def find_longest_repetition(seq: List[int]) -> int:
