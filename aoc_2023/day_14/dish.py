@@ -15,7 +15,6 @@ WEST = "W"
 SOUTH = "S"
 
 N_CYCLE = 1000000000
-CACHE = {}
 
 
 def find_longest_repetition(seq: List[int]) -> int:
@@ -35,8 +34,6 @@ def tilt_map(map_data: List[str], direction: str=NORTH) -> List[str]:
     if direction in {EAST, SOUTH}:
         map_data = [l[::-1] for l in map_data]
     hash_map = hash("".join(map_data))
-    if hash_map in CACHE:
-        return CACHE[hash_map]
     new_map_data = []
     for map_line in map_data:
         n_move = 0
@@ -54,7 +51,6 @@ def tilt_map(map_data: List[str], direction: str=NORTH) -> List[str]:
         new_map_data = [l[::-1] for l in new_map_data]
     if direction in {NORTH, SOUTH}:
         new_map_data = ["".join(cs) for cs in zip(*new_map_data)]
-    CACHE[hash_map] = new_map_data
     return new_map_data
  
 
